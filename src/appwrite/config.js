@@ -1,8 +1,7 @@
-import conf from '../conf.js';
-import {Client , Account , ID , Databases , Storage , Query} from "appwrite" ;
+import conf from '../conf/conf.js';
+import {Client , Account , ID , Databases , Storage , Query , Permission , Role} from "appwrite" ;
 export class Services{
     client = new Client();
-    account;
     databases;
     bucket;
     constructor(){
@@ -11,16 +10,17 @@ export class Services{
                 .setProject(conf.projectId);
                 this.databases = new Databases(this.client);
                 this.bucket = new Storage(this.client);
+
             
 }
 //create post method
-async createPost({title , slug ,content , featuredImage , status , userID}){
+async createPost({title , slug ,content , featuredImage , status , userId}){
     try {
           return await this.databases.createDocument(
             conf.databaseId,
             conf.collectionId,
             ID.unique(),
-            {title ,content , featuredImage , status , userID}
+            {title ,content , featuredImage , status , userId}
 
           )
     } 
@@ -29,7 +29,7 @@ async createPost({title , slug ,content , featuredImage , status , userID}){
     }
 }
 //update post method
-async updatePost({slug , title  ,content , featuredImage , status}){
+async updatePost(slug ,{ title  ,content , featuredImage , status}){
 try{
       return await this.databases.updateDocument(
         conf.databaseId,
@@ -48,8 +48,8 @@ catch(error){
 async deletePost(slug){
 try{
     await this.databases.deleteDocument(
-        conf.DatabaseId,
-        conf.CollectionId,
+        conf.databaseId,
+        conf.collectionId,
         slug
     )
     return true;
@@ -59,7 +59,7 @@ try{
 }
 }
 //get single post method
-async getPosts(slug){
+async getPost(slug){
     try{
         return await this.databases.getDocument(
             conf.databaseId,
@@ -94,7 +94,8 @@ async uploadFile(file){
         return await this.bucket.createFile(
             conf.bucketId,
             ID.unique(),
-            file
+            file,
+            [Permission.read(Role.any())]
         )
     }
     catch(error){
@@ -116,8 +117,11 @@ catch(error){
     return false;
 }}
 //get file preview method
-getFilePreview(fileId){
-    return this.bucket.getFilePreview(
+async getFilePreview(fileId){
+    if (!fileId) {
+        return "";
+    }
+    return await this.bucket.getFileView(
         conf.bucketId,
         fileId
     )
@@ -125,5 +129,3 @@ getFilePreview(fileId){
 }
 const service = new Services();
 export default service;
-//test file
-console.log("i am here")
