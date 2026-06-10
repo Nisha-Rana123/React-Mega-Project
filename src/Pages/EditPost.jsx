@@ -22,8 +22,12 @@ function  EditPost(){
     }
     },[slug , navigate])
     return post?(
-  <div className="py-8">
+  <div className="py-12">
     <Container>
+        <div className="mb-8 text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-violet-300">Refine your story</p>
+            <h1 className="mt-3 text-4xl font-black text-white sm:text-5xl">Edit Post</h1>
+        </div>
         <PostForm post={post}/>
     </Container>
   </div>

@@ -21,6 +21,7 @@ import {useSelector} from "react-redux";
   const navigate = useNavigate();
   const userData = useSelector(state => state.auth.userData);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const selectedImage = watch("image");
 
   useEffect(() => {
     let active = true;
@@ -39,6 +40,16 @@ import {useSelector} from "react-redux";
       active = false;
     };
   }, [post]);
+
+  useEffect(() => {
+    const file = selectedImage?.[0];
+    if (!file) return;
+
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreviewUrl(previewUrl);
+
+    return () => URL.revokeObjectURL(previewUrl);
+  }, [selectedImage]);
 
 const submit = async (data) => {
         if (post) {
@@ -91,8 +102,8 @@ React.useEffect(()=>{
  }
 },[watch , slugTransform , setValue ])
    return (
-        <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form onSubmit={handleSubmit(submit)} className="grid gap-6 rounded-3xl border border-violet-400/20 bg-[#1E293B]/60 p-5 shadow-[0_30px_100px_rgba(0,0,0,0.35)] backdrop-blur-2xl sm:p-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)]">
+            <div>
                 <Input
                     label="Title :"
                     placeholder="Title"
@@ -110,20 +121,22 @@ React.useEffect(()=>{
                 />
                 <RTE label="Content :" name="content" control={control} defaultValue={getValues("content")} />
             </div>
-            <div className="w-1/3 px-2">
-                <Input
-                    label="Featured Image :"
-                    type="file"
-                    className="mb-4"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
-                    {...register("image")}
-                />
+            <div className="rounded-3xl border border-white/10 bg-slate-950/45 p-5 shadow-inner shadow-violet-950/20">
+                <div className="mb-4 rounded-3xl border border-dashed border-violet-300/30 bg-violet-500/5 p-4 text-center transition hover:border-violet-300/70 hover:bg-violet-500/10">
+                    <Input
+                        label="Featured Image :"
+                        type="file"
+                        accept="image/png, image/jpg, image/jpeg, image/gif"
+                        {...register("image")}
+                    />
+                    <p className="mt-3 text-xs text-slate-400">Upload a cinematic cover image for your PIXORA story.</p>
+                </div>
                 {imagePreviewUrl && (
-                    <div className="w-full mb-4">
+                    <div className="mb-4 w-full overflow-hidden rounded-2xl border border-violet-300/20">
                         <img
                             src={imagePreviewUrl}
-                            alt={post.title}
-                            className="rounded-lg"
+                            alt={post?.title || "Featured preview"}
+                            className="h-56 w-full object-cover"
                         />
                     </div>
                 )}
@@ -133,8 +146,8 @@ React.useEffect(()=>{
                     className="mb-4"
                     {...register("status", { required: true })}
                 />
-                <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
-                    {post ? "Update" : "Submit"}
+                <Button type="submit" bgColor="bg-gradient-to-r from-fuchsia-500 to-violet-600" className="w-full">
+                    {post ? "Update Post" : "Create Post"}
                 </Button>
             </div>
         </form>

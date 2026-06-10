@@ -13,9 +13,9 @@ export default function RTE({name , control , label , defaultValue = ""}){
 //  used to handle the change event of the editor.here field is destructured to get the onChange function which will be used 
 // to handle the change event of the editor.
     return (
-        <div className="w-full">
+        <div className="w-full overflow-hidden rounded-2xl">
             {label && (
-                <label className="inline-block mb-1 pl-1" htmlFor={name}>
+                <label className="inline-block mb-2 pl-1 text-sm font-semibold text-slate-200" htmlFor={name}>
                     {label}
                 </label>
             )}
@@ -55,7 +55,9 @@ export default function RTE({name , control , label , defaultValue = ""}){
                             ],
                             toolbar:
                                 "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
-                            content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                            skin: "oxide-dark",
+                            content_css: "dark",
+                            content_style: "body { font-family:Inter,Helvetica,Arial,sans-serif; font-size:16px; color:#e2e8f0; background:#0f172a; }",
                             images_upload_handler: async (blobInfo) => {
                                 const file = new File([blobInfo.blob()], blobInfo.filename(), { type: blobInfo.blob().type });
                                 try {

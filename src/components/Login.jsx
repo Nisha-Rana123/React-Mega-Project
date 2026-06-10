@@ -32,24 +32,24 @@ function Login(){
         }
     }
     return(
-<div className="w-full bg-gray-100 flex items-center justify-center">
-    <div className={`mx-auto w-full max-w-md p-6 border border-gray-300 rounded-lg shadow-md bg-white`}>
+<div className="flex min-h-[70vh] w-full items-center justify-center bg-[#020817] px-4 py-12">
+    <div className="mx-auto w-full max-w-md rounded-lg border border-violet-400/25 bg-[#050b22]/90 p-7 shadow-[0_0_55px_rgba(139,92,246,0.22)] backdrop-blur-xl">
         <div className="flex justify-center mb-6">
-            <span className="inline-block w-full max-w-md">
-                <Logo width="100%" />
+            <span className="inline-block">
+                <Logo width="100px" />
             </span>
        </div>
-       <h2 className="text-2xl font-bold text-center mb-6 leading-tight">Sign in to your account</h2>
-         <p className="mt-2 text-center text-base text-black/60">
+       <h2 className="text-center text-3xl font-black leading-tight text-white">Welcome back</h2>
+         <p className="mt-3 text-center text-sm text-slate-400">
                     Don&apos;t have any account?&nbsp;
                     <Link 
                         to="/signup"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
+                        className="font-bold text-violet-300 transition-all duration-200 hover:text-white hover:underline"
                     >
                      Sign Up
                     </Link>
         </p>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {error && <p className="mt-5 rounded-lg border border-red-400/30 bg-red-500/10 p-3 text-center text-sm text-red-200">{error}</p>}
         <form onSubmit={handleSubmit(login)} className="mt-6">
              <div className="space-y-5">
                 <Input 
@@ -68,7 +68,7 @@ function Login(){
                     type="password"
                     placeholder="Enter your password"
                     {...register("password", {required: true})}/>
-                    <Button type="submit" className="w-full">Sign In</Button>
+                    <Button type="submit" bgColor="bg-gradient-to-r from-fuchsia-500 to-violet-600" className="w-full rounded-lg">Sign In</Button>
              </div>
         </form>
    </div>   

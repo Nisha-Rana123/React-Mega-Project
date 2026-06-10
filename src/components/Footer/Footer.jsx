@@ -1,141 +1,59 @@
 import React from "react";
-import {Link} from "react-router-dom";
-import  Logo from '../Logo'
-export function Footer(){
-   return (
-    <section className="relative overflow-hidden py-10 bg-gray-400 border border-t-2 border-t-black">
+import { Link } from "react-router-dom";
+import Logo from "../Logo";
+
+export function Footer() {
+    const linkClass = "block text-sm text-slate-300 transition duration-300 hover:translate-x-1 hover:text-violet-300";
+
+    return (
+        <footer className="relative overflow-hidden border-t border-violet-500/10 bg-[#031027] py-12">
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-400/60 to-transparent" />
             <div className="relative z-10 mx-auto max-w-7xl px-4">
-                <div className="-m-6 flex flex-wrap">
-                    <div className="w-full p-6 md:w-1/2 lg:w-5/12">
-                        <div className="flex h-full flex-col justify-between">
-                            <div className="mb-4 inline-flex items-center">
-                                <Logo width="100px" />
-                            </div>
+                <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
+                    <div>
+                        <div className="mb-4 flex items-center gap-4">
+                            <Logo width="70px" />
                             <div>
-                                <p className="text-sm text-gray-600">
-                                    &copy; Copyright 2023. All Rights Reserved by DevUI.
-                                </p>
+                                <h2 className="bg-gradient-to-r from-fuchsia-400 to-violet-400 bg-clip-text text-3xl font-black text-transparent">PIXORA</h2>
+                                <p className="text-sm font-semibold text-slate-300">Picture + Blog Platform</p>
                             </div>
                         </div>
-                    </div>
-                    <div className="w-full p-6 md:w-1/2 lg:w-2/12">
-                        <div className="h-full">
-                            <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
-                                Company
-                            </h3>
-                            <ul>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Features
-                                    </Link>
-                                </li>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Pricing
-                                    </Link>
-                                </li>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Affiliate Program
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Press Kit
-                                    </Link>
-                                </li>
-                            </ul>
+                        <p className="max-w-sm text-slate-400">
+                            A platform where moments,<br />ideas and stories come alive.
+                        </p>
+                        <div className="mt-6 flex gap-3">
+                            {["f", "X", "IG", "GH"].map((icon) => (
+                                <Link key={icon} to="/" className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/5 text-xs font-bold text-white transition hover:-translate-y-1 hover:border-violet-300/60 hover:bg-violet-500/20 hover:shadow-[0_0_28px_rgba(139,92,246,0.45)]">
+                                    {icon}
+                                </Link>
+                            ))}
                         </div>
                     </div>
-                    <div className="w-full p-6 md:w-1/2 lg:w-2/12">
-                        <div className="h-full">
-                            <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
-                                Support
-                            </h3>
-                            <ul>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Account
-                                    </Link>
-                                </li>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Help
-                                    </Link>
-                                </li>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Contact Us
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Customer Support
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+                    <div>
+                        <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">Company</h3>
+                        <ul className="space-y-3">
+                            {["About Us", "Features", "Pricing", "Press Kit"].map((item) => <li key={item}><Link className={linkClass} to="/">{item}</Link></li>)}
+                        </ul>
                     </div>
-                    <div className="w-full p-6 md:w-1/2 lg:w-3/12">
-                        <div className="h-full">
-                            <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
-                                Legals
-                            </h3>
-                            <ul>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Terms &amp; Conditions
-                                    </Link>
-                                </li>
-                                <li className="mb-4">
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Privacy Policy
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className=" text-base font-medium text-gray-900 hover:text-gray-700"
-                                        to="/"
-                                    >
-                                        Licensing
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+                    <div>
+                        <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">Support</h3>
+                        <ul className="space-y-3">
+                            {["Help Center", "Contact Us", "FAQs", "Community"].map((item) => <li key={item}><Link className={linkClass} to="/">{item}</Link></li>)}
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-violet-300">Legal</h3>
+                        <ul className="space-y-3">
+                            {["Terms & Conditions", "Privacy Policy", "Licensing"].map((item) => <li key={item}><Link className={linkClass} to="/">{item}</Link></li>)}
+                        </ul>
                     </div>
                 </div>
+                <div className="mt-10 border-t border-white/10 pt-5 text-center text-sm text-slate-400">
+                    (c) 2026 PIXORA. All rights reserved.
+                </div>
             </div>
-        </section>
-  )
- }
- export default Footer;
+        </footer>
+    );
+}
+
+export default Footer;

@@ -26,10 +26,10 @@ function App() {
 },[])
   console.log("app render")
  return !loading ? (
-  <div className="min-h-screen bg-gray-100 flex-wrap content-between">
+  <div className="min-h-screen overflow-hidden bg-[#0F172A] text-slate-100">
     <div className='w-full block'>
       <Header/>
-      <main>
+      <main className="min-h-[70vh]">
     <Outlet/>
       </main>
       <Footer/>
